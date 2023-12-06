@@ -1,9 +1,13 @@
-
 import sys
+import os
+from pathlib import Path
+parent_dir = os.path.dirname(Path(os.path.abspath(__file__)).parent)
+sys.path.append(parent_dir)
+import utils
 
+@utils.time_decorator
 def do(data):
     
-    # Parse data
     time = data[0][10:].split()
     distance = data[1][10:].split()
 
@@ -19,7 +23,7 @@ def do(data):
 
     return res
 
-with open(r"C:\Users\Federico\Desktop\AoC\2023\06\input.txt") as f:
+with open("2023/06/input.txt") as f:
     data = f.read().splitlines()
 #     data = """Time:      7  15   30
 # Distance:  9  40  200
