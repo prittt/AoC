@@ -73,13 +73,17 @@ def do(data):
         res += value * (i + 1)
     return res
 
-with open("2023/07/input.txt") as f:
-    print(red("Part 2:"))
+input_file = os.path.join("2023", os.path.normpath(__file__).split(os.sep)[-2], "input.txt")
+with open(input_file) as f:
+    example = False
     data = f.read().splitlines()
 #     data = """32T3K 765
 # T55J5 684
 # KK677 28
 # KTJJT 220
-# QQQJA 483""".split("\n")
+# QQQJA 483""".split("\n"); example = True
+    print(green(f"DAY {f.name.split(os.sep)[1]}.",  ["bold"]),
+          "Running", red(f"{os.path.basename(__file__)}"), "on",
+          blue(f"{"example" if example else "real input"}"), "file:")
     res = do(data)  
     print("Result should be (🤞):", res)

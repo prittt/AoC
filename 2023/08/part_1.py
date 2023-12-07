@@ -12,9 +12,13 @@ def do(data):
     res = 0
     return res
 
-with open("2023/08/input.txt") as f:
-    print(red("Part 1:"))
+input_file = os.path.join("2023", os.path.normpath(__file__).split(os.sep)[-2], "input.txt")
+with open(input_file) as f:
+    example = False
     data = f.read().splitlines()
-#     data = """""".split("\n")
+#     data = """""".split("\n"); example = True
+    print(green(f"DAY {f.name.split(os.sep)[1]}.",  ["bold"]),
+          "Running", red(f"{os.path.basename(__file__)}"), "on",
+          blue(f"{"example" if example else "real input"}"), "file:")
     res = do(data)  
     print("Result should be (🤞):", res)

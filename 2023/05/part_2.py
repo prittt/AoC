@@ -1,5 +1,11 @@
 
 import sys
+import os
+from simple_colors import *
+from pathlib import Path
+parent_dir = os.path.dirname(Path(os.path.abspath(__file__)).parent)
+sys.path.append(parent_dir)
+import utils
 
 def get_maps(data):
     data = data[3:]
@@ -40,7 +46,7 @@ def do(data):
         for m,name in zip(mappings, mappings_name):
             updated_ranges = {}
             not_updated_ranges = {}
-            print(name)
+            # print(name)
             for x in m: # qui itero tu tutti i mapping dell'm corrente (seed to soil, poi soil to fertilizer, etc.)
                 source_start = int(x[1])
                 source_end = int(x[2]) + int(x[1])
@@ -87,7 +93,9 @@ def do(data):
     return min_pos
 
 
-with open('2023/05/input.txt') as f:
+input_file = os.path.join("2023", os.path.normpath(__file__).split(os.sep)[-2], "input.txt")
+with open(input_file) as f:
+    example = False
     data = f.read().splitlines()
 #     data = """seeds: 79 14 55 13
 
@@ -121,6 +129,9 @@ with open('2023/05/input.txt') as f:
 
 # humidity-to-location map:
 # 60 56 37
-# 56 93 4""".split("\n")
+# 56 93 4""".split("\n"); example = True
+    print(green(f"DAY {f.name.split(os.sep)[1]}.",  ["bold"]),
+          "Running", red(f"{os.path.basename(__file__)}"), "on",
+          blue(f"{"example" if example else "real input"}"), "file:")
     res = do(data)  
     print("Result should be (🤞):", res)

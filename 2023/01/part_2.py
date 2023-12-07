@@ -1,3 +1,12 @@
+import sys
+import os
+from simple_colors import *
+from pathlib import Path
+parent_dir = os.path.dirname(Path(os.path.abspath(__file__)).parent)
+sys.path.append(parent_dir)
+import utils
+
+@utils.time_decorator
 def do(data):
     numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     values = {"one" : 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8 , "nine": 9, "1": 1, "2": 2, "3":3 , "4":4, "5":5, "6":6, "7":7, "8":8, "9":9}
@@ -21,7 +30,13 @@ def do(data):
         res += num
     return res
 
-with open('2023/01/input.txt') as f:
+input_file = os.path.join("2023", os.path.normpath(__file__).split(os.sep)[-2], "input.txt")
+with open(input_file) as f:
+    example = False
     data = f.read().splitlines()
-    res = do(data)
+#     data = """""".split("\n"); example = True
+    print(green(f"DAY {f.name.split(os.sep)[1]}.",  ["bold"]),
+          "Running", red(f"{os.path.basename(__file__)}"), "on",
+          blue(f"{"example" if example else "real input"}"), "file:")
+    res = do(data)  
     print("Result should be (🤞):", res)

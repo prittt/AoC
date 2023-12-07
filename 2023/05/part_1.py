@@ -1,5 +1,12 @@
 
 import sys
+import os
+from simple_colors import *
+from pathlib import Path
+parent_dir = os.path.dirname(Path(os.path.abspath(__file__)).parent)
+sys.path.append(parent_dir)
+import utils
+
 
 def get_maps(data):
     data = data[3:]
@@ -18,6 +25,7 @@ def get_maps(data):
     maps.append(curr_map)
     return maps
 
+@utils.time_decorator
 def do(data):
     
     seeds = data[0].split(":")[1].split()
@@ -36,11 +44,14 @@ def do(data):
         if seed < min_pos:
             min_pos = seed
         i += 1
-        print(i)
+        # print(i)
     
     return min_pos
 
-with open('2023/05/input.txt') as f:
+
+input_file = os.path.join("2023", os.path.normpath(__file__).split(os.sep)[-2], "input.txt")
+with open(input_file) as f:
+    example = False
     data = f.read().splitlines()
 #     data = """seeds: 79 14 55 13
 
@@ -74,6 +85,9 @@ with open('2023/05/input.txt') as f:
 
 # humidity-to-location map:
 # 60 56 37
-# 56 93 4""".split("\n")
+# 56 93 4""".split("\n"); example = True
+    print(green(f"DAY {f.name.split(os.sep)[1]}.",  ["bold"]),
+          "Running", red(f"{os.path.basename(__file__)}"), "on",
+          blue(f"{"example" if example else "real input"}"), "file:")
     res = do(data)  
     print("Result should be (🤞):", res)
