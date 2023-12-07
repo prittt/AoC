@@ -9,14 +9,13 @@ from collections import defaultdict, Counter
 
 def get_type(card):
     
-    # # For the submission
-    counts = {}
-    for c in card[0]:
-        counts[c] = counts.get(c, 0) + 1
+    # For the submission
+    # counts = {}
+    # for c in card[0]:
+    #     counts[c] = counts.get(c, 0) + 1
     
     # After submission
-    #counts = Counter(card[0])
-
+    counts = Counter(card[0])
 
     if sorted(counts.values()) == [5]:
         # five of a kind
@@ -44,8 +43,8 @@ def get_type(card):
         print(counts)
         sys.exit(1)
 
-    ncp = ord("9") # nine char position (should be 57)
-    card[0] = card[0].replace("T", chr(ncp + 1)).replace("J", chr(ncp + 2)).replace("Q", chr(ncp + 3)).replace("K", chr(ncp + 4)).replace("A", chr(ncp + 5))
+    c = 57
+    card[0] = card[0].replace("T", chr(c + 1)).replace("J", chr(c + 2)).replace("Q", chr(c + 3)).replace("K", chr(c + 4)).replace("A", chr(c + 5))
 
 
 @utils.time_decorator
